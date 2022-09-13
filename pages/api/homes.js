@@ -6,8 +6,10 @@ export default async function handler(req, res) {
   // Create new home
   if (req.method === 'POST') {
     try {
-      const { image, title, description, price, guests, beds, baths } = req.body;
-      const home =  await prisma.home.create({
+      const { image, title, description, price, guests, beds, baths } =
+        req.body;
+
+      const home = await prisma.home.create({
         data: {
           image,
           title,
@@ -15,12 +17,12 @@ export default async function handler(req, res) {
           price,
           guests,
           beds,
-          baths
-        }
-      })
-
+          baths,
+        },
+      });
       res.status(200).json(home);
-    } catch (err) {
+    } catch (e) {
+      console.error(e)
       res.status(500).json({ message: 'Something went wrong' });
     }
   }
