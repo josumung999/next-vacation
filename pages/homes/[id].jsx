@@ -62,3 +62,22 @@ export async function getStaticPaths() {
     fallback: false,
   }
 }
+
+export async function getStaticProps() {
+  const home = await prisma.home.findUnique({
+    where: {  id: params.id },
+  });
+
+  if (home) {
+    return {
+      props: JSON.parse(JSON.stringify(home)),
+    };
+  }
+
+  return {
+    redirect: {
+      destination: '/',
+      permanent: false
+    }
+  }
+}
