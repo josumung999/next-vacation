@@ -52,12 +52,12 @@ export default ListedHome;
 
 export async function getStaticPaths() {
   const homes = await prisma.home.findMany({
-    select: { id: true }
-  })
+    select: { id: true },
+  });
 
   return {
     paths: homes.map(home => ({
-      params: { id: home.id }
+      params: { id: home.id },
     })),
     fallback: false,
   }
