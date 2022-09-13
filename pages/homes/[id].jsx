@@ -63,9 +63,10 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ params }) {
+  // Get the current home from the database
   const home = await prisma.home.findUnique({
-    where: {  id: params.id },
+    where: { id: params.id },
   });
 
   if (home) {
@@ -77,7 +78,7 @@ export async function getStaticProps() {
   return {
     redirect: {
       destination: '/',
-      permanent: false
-    }
-  }
+      permanent: false,
+    },
+  };
 }
